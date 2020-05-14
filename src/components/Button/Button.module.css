@@ -1,0 +1,27 @@
+.button {
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    border: none;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 20px;
+}
+.button:hover {
+    color: #ccc;
+}
+.bordered {
+    border: 1px solid #d60909;
+    background: transparent;
+    margin-right: 20px;
+}
+.red {
+    background: #d60909;
+}
+.red:hover {
+    background: #e42727;
+}
+
+ 

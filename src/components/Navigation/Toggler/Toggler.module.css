@@ -1,0 +1,27 @@
+.card {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    position: absolute;
+    height: 100%;
+    right: 10px;
+    top: 10px;
+    width: 44px;
+    height: 28px;
+    z-index: 30;
+    background: transparent;
+    padding: 7px 0 0 10px;
+}
+.bar {
+    height: 2px;
+    display: block;
+    width: 22px;
+    background-color: #ffffff;
+}
+.top {
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+.middle {
+    margin-bottom: 4px;
+}
