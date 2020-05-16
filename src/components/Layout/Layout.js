@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Toolbar from '../Navigation/Toolbar/Toolbar'
 import Mobilepanel from '../Navigation/Mobilepanel/Mobilepanel';
+import Showcase from '../Showcase/Showcase'
 class Layout extends Component {
     state = {
         showmobilepanel: false
@@ -18,9 +19,10 @@ class Layout extends Component {
             <>
                 <Mobilepanel open={this.state.showmobilepanel} closepanel={this.closepanelHandler}/>
                 <Toolbar  clicked={this.mobilePanelHandler}/>
-                <div>showcase section</div>
-                <div>movies</div>
-                <div>tv shows</div>
+                <Showcase/>
+                <main>
+                    {this.props.children}
+                </main>
             </>
         )
 

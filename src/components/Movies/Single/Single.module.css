@@ -1,0 +1,70 @@
+.card {
+    height: 420px;
+    width: 290px;
+    position: relative;
+    font-size: 62.5%;
+    background-image: linear-gradient(to right, #8e0e00, #1f1c18);
+    color: white;
+}
+.img {
+    background-position: center;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.modal {
+    background-image: linear-gradient(to bottom, transparent,40%, rgba(8, 8, 8, 0.5),60%, rgba(8, 8, 8));
+    width: 100%;
+    height: 100%;
+    padding: 1.5em;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    transition: all .4s ease;
+}
+.modal:hover > div + div {
+    transform: translateY(0);
+}
+.title {
+    font-size: 2em;
+    font-weight: 400;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+}
+.description {
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+    letter-spacing: .05em;
+    transform: translateY(2rem);
+    transition: all .4s ease;
+}
+.button {
+    font-size: 1em;
+    margin-bottom: 1em;
+    transition: all .4s ease;
+    transform: translateY(2rem);
+}
+.link {
+    display: block;
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+.link:hover {
+    color: rgb(167, 166, 166);
+    border-bottom: 1px solid rgb(167, 166, 166);
+}
+
+.btitle {
+    position: absolute;
+    bottom: -4rem;
+    left: 0;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
