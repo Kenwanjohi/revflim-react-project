@@ -65,6 +65,7 @@
     position: absolute;
     bottom: -5rem;
     left: 0;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    font-weight: 400;
     margin-bottom: 1rem;
 }

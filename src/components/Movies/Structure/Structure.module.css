@@ -11,6 +11,8 @@
     color: white;
     margin-bottom: 1em;
     font-size: 1.5em;
+    font-weight: 300;
+    text-transform: capitalize;
 }
 .arrow {
     border: solid white;
@@ -20,6 +22,10 @@
     color: black;
     z-index: 10;
     position: absolute;
+    transition: all .2s ease-in-out;
+  }
+  .arrow:hover {
+    scale: 1.2;
   }
   .arrow::after {
     content: "";

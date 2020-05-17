@@ -1,6 +1,12 @@
 import React from 'react';
 import Styles from './Single.module.css';
 const single = props => {
+    function truncateTitle(str, num=30) {
+        if (str.length <= num) {
+          return str
+        }
+        return str.slice(0, num) + '...'
+      }
     return(
         <>
         <div className={Styles.card}>
@@ -12,7 +18,7 @@ const single = props => {
                     <a className={Styles.link} href={`/${props.details}`}>read more &#8608;</a>
                 </div>
             </div>
-        <div className={Styles.btitle}>{props.title}</div>
+        <div className={Styles.btitle}>{truncateTitle(props.title)}</div>
         
         </div>
         </>

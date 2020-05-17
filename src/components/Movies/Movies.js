@@ -3,7 +3,6 @@ import Type from './Type/Type';
 import Structure from './Structure/Structure'
 import Styles from './Movies.module.css'
 import axios from 'axios'
-import Spinner from '../Spinner/Spinner'
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
 const apikey = `6d52450de693cb39e47fd26bd1c349da`;
 const endPoints = {
@@ -53,54 +52,6 @@ componentDidMount() {
     }
     render() {
         console.log(this.state)
-        const {
-            comingsoonresults,
-            comingsoonisLoading,
-            comingsoonerror,
-            comingsoonerrorstring,
-            nowplayingresults,
-            nowplayingisLoading,
-            nowplayingerror,
-            nowplayingerrorstring,
-            popularresults,
-            popularisLoading,
-            popularerror,
-            popularerrorstring,
-            topratedresults,
-            topratedisLoading,
-            topratederror,
-            topratederrorstring
-
-        } = this.state
-       //popular section
-       if(popularerror) {
-           return <div>{popularerrorstring}</div>
-        } 
-        if(popularisLoading) {
-            return <Spinner>loading...</Spinner>
-        }
-
-        //toprated section
-        if(topratederror) {
-           return <div>{topratederrorstring}</div>
-        }
-        if(topratedisLoading) {
-            return <Spinner>loading...</Spinner>
-        }
-        //comingsoon section
-        if(comingsoonerror) {
-           return <div>{comingsoonerrorstring}</div>
-        }
-        if(comingsoonisLoading) {
-            return <Spinner>loading...</Spinner>
-        }
-        //nowplaying section
-        if(nowplayingerror) {
-           return <div>{nowplayingerrorstring}</div>
-        }
-        if(nowplayingisLoading) {
-            return <Spinner>loading...</Spinner>
-        }
         return(
             <> 
             <Type>Movies</Type>
@@ -111,10 +62,7 @@ componentDidMount() {
                         topsec="toprated"
                         nowsec="nowplaying"
                         comingsec="upcoming"
-                        toprated={topratedresults}
-                        comingsoon={comingsoonresults}
-                        popular={popularresults}
-                        nowplaying={nowplayingresults}
+                        data= {this.state}
                     />  
                  </div> 
           

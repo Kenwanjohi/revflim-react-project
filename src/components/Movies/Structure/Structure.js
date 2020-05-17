@@ -1,30 +1,77 @@
 import React from 'react';
 import Single from '../Single/Single';
 import Styles from './Structure.module.css';
+import Spinner from '../../Spinner/Spinner'
 const structure = (props) => {
+    const {
+        comingsoonresults,
+        comingsoonisLoading,
+        comingsoonerror,
+        comingsoonerrorstring,
+        nowplayingresults,
+        nowplayingisLoading,
+        nowplayingerror,
+        nowplayingerrorstring,
+        popularresults,
+        popularisLoading,
+        popularerror,
+        popularerrorstring,
+        topratedresults,
+        topratedisLoading,
+        topratederror,
+        topratederrorstring
+
+    } = props.data
+           //popular section
+           if(popularerror) {
+            return <div>{popularerrorstring}</div>
+         } 
+         if(popularisLoading) {
+             return <Spinner>loading...</Spinner>
+         }
+ 
+         //toprated section
+         if(topratederror) {
+            return <div>{topratederrorstring}</div>
+         }
+         if(topratedisLoading) {
+             return <Spinner>loading...</Spinner>
+         }
+         //comingsoon section
+         if(comingsoonerror) {
+            return <div>{comingsoonerrorstring}</div>
+         }
+         if(comingsoonisLoading) {
+             return <Spinner>loading...</Spinner>
+         }
+         //nowplaying section
+         if(nowplayingerror) {
+            return <div>{nowplayingerrorstring}</div>
+         }
+         if(nowplayingisLoading) {
+             return <Spinner>loading...</Spinner>
+         }
         function truncateString(str, num=105) {
             if (str.length <= num) {
               return str
             }
             return str.slice(0, num) + '...'
           }
-          // eslint-disable-next-line
-          const { popular, toprated, comingsoon, nowplaying } = props
           let pop = null
-          if(popular) {
-              pop = popular.slice(0, 4).map(curr => <Single key={curr.id} title={curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+          if(popularresults) {
+              pop = popularresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
           let top
-          if(toprated) {
-              top = toprated.slice(0, 4).map(curr => <Single key={curr.id} title={curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+          if(topratedresults) {
+              top = topratedresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
           let coming
-          if(comingsoon) {
-              coming = comingsoon.slice(0, 4).map(curr => <Single key={curr.id} title={curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+          if(comingsoonresults) {
+              coming = comingsoonresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
           let now
-          if(nowplaying) {
-              now = nowplaying.slice(0, 4).map(curr => <Single key={curr.id} title={curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+          if(nowplayingresults) {
+              now = nowplayingresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
         return(
     
