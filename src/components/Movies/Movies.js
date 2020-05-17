@@ -33,17 +33,17 @@ componentDidMount() {
            [`${key}error`] : null
         }, async () => {
             try{
-                let result = await axios.get(`${BASE_URL}${endPoint}?api_key=${apikey}&language=en-US`)
+                let result = await axios.get(`https://cors-anywhere.herokuapp.com/${BASE_URL}${endPoint}?api_key=${apikey}&language=en-US`)
                 const results = await result.data.results
                 this.setState({
                     [`${key}isLoading`]: false,
                     [`${key}results`] : results,
-                    [`${key}error`] : null})
+                    [`${key}error`] : false})
 
             } catch(error) {
                 this.setState({
                     [`${key}isLoading`]: false,
-                    [`${key}error`] : null,
+                    [`${key}error`] : true,
                     [`${key}errorstring`]: error.message
                 })
             }
@@ -54,62 +54,68 @@ componentDidMount() {
     render() {
         console.log(this.state)
         const {
-            // comingsoonresults,
-            // // comingsoonisLoading,
-            // comingsoonerror,
-            // comingsoonerrorstring,
-            // nowplayingresults,
-            // // nowplayingisLoading,
-            // nowplayingerror,
-            // nowplayingerrorstring,
+            comingsoonresults,
+            comingsoonisLoading,
+            comingsoonerror,
+            comingsoonerrorstring,
+            nowplayingresults,
+            nowplayingisLoading,
+            nowplayingerror,
+            nowplayingerrorstring,
             popularresults,
-            // popularisLoading,
+            popularisLoading,
             popularerror,
             popularerrorstring,
             topratedresults,
-            // topratedisLoading,
+            topratedisLoading,
             topratederror,
             topratederrorstring
 
         } = this.state
-        
-        // let popular = popularerror ?   <div>{popularerrorstring}</div> : <Spinner>loading...</Spinner>
-        // if(popularresults) {
-        //     popular = <Structure 
-        //     name="popular"
-        //     popular={popularresults}
-        //      />
-        // }
-        let toprated = topratederror ?   <div>{topratederrorstring}</div> : <Spinner>loading...</Spinner>
-        if(topratedresults) {
-            toprated = <Structure 
-            name="toprated"
-            toprated={topratedresults}
-             />
+       //popular section
+       if(popularerror) {
+           return <div>{popularerrorstring}</div>
+        } 
+        if(popularisLoading) {
+            return <Spinner>loading...</Spinner>
         }
-        // let comingsoon = comingsoonerror ?   <div>{comingsoonerrorstring}</div> : <Spinner>loading...</Spinner>
-        // if(comingsoonresults) {
-        //     comingsoon = <Structure 
-        //     name="comingsoon"
-        //     comingsoon={comingsoonresults}
-        //      />
-        // }
-        // let nowplaying = nowplayingerror ?   <div>{nowplayingerrorstring}</div> : <Spinner>loading...</Spinner>
-        // if(nowplayingresults) {
-        //     nowplaying = <Structure 
-        //     name="nowplaying"
-        //     nowplaying={nowplayingresults}
-        //      />
-        // }
+
+        //toprated section
+        if(topratederror) {
+           return <div>{topratederrorstring}</div>
+        }
+        if(topratedisLoading) {
+            return <Spinner>loading...</Spinner>
+        }
+        //comingsoon section
+        if(comingsoonerror) {
+           return <div>{comingsoonerrorstring}</div>
+        }
+        if(comingsoonisLoading) {
+            return <Spinner>loading...</Spinner>
+        }
+        //nowplaying section
+        if(nowplayingerror) {
+           return <div>{nowplayingerrorstring}</div>
+        }
+        if(nowplayingisLoading) {
+            return <Spinner>loading...</Spinner>
+        }
         return(
             <> 
             <Type>Movies</Type>
            
                 <div className={Styles.card}>
-                {/* {popular} */}
-                {/* {comingsoon}
-                {nowplaying} */}
-                {toprated}
+                    <Structure 
+                        popsec="popular"
+                        topsec="toprated"
+                        nowsec="nowplaying"
+                        comingsec="upcoming"
+                        toprated={topratedresults}
+                        comingsoon={comingsoonresults}
+                        popular={popularresults}
+                        nowplaying={nowplayingresults}
+                    />  
                  </div> 
           
             </>
