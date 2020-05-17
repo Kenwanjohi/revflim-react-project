@@ -29,29 +29,37 @@ const structure = (props) => {
         return(
     
             <>
+            <div className={Styles.card}>
             <div className={Styles.section}>{props.popsec}</div>
                <i className={`${Styles.right} ${Styles.arrow}`}></i>
                <i className={`${Styles.left} ${Styles.arrow}`}></i>
                 <div className={Styles.grid}>
                 {pop}
             </div>
+            </div>
+            <div className={Styles.card}>
             <div className={Styles.section}>{props.nowsec}</div>
                <i className={`${Styles.right} ${Styles.arrow}`}></i>
                <i className={`${Styles.left} ${Styles.arrow}`}></i>
                 <div className={Styles.grid}>
                 {now}
             </div>
+            </div>
+            <div className={Styles.card}>
             <div className={Styles.section}>{props.comingsec}</div>
                <i className={`${Styles.right} ${Styles.arrow}`}></i>
                <i className={`${Styles.left} ${Styles.arrow}`}></i>
                 <div className={Styles.grid}>
                 {coming}
             </div>
-            <div className={Styles.section}>{props.popsec}</div>
+            </div>
+            <div className={Styles.card}>
+            <div className={Styles.section}>{props.topsec}</div>
                <i className={`${Styles.right} ${Styles.arrow}`}></i>
                <i className={`${Styles.left} ${Styles.arrow}`}></i>
                 <div className={Styles.grid}>
                 {top}
+            </div>
             </div>
             </>
         )

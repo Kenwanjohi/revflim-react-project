@@ -13,7 +13,7 @@ const single = props => {
                 </div>
             </div>
         <div className={Styles.btitle}>{props.title}</div>
-           
+        
         </div>
         </>
     )

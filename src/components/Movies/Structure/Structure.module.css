@@ -4,6 +4,9 @@
     grid-template-columns: repeat(4, 2fr);
 
 }
+.card {
+  position: relative;
+}
 .section {
     color: white;
     margin-bottom: 1em;
@@ -16,7 +19,7 @@
     padding: 10px;
     color: black;
     z-index: 10;
-    position: relative;
+    position: absolute;
   }
   .arrow::after {
     content: "";
