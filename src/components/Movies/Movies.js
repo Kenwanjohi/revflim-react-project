@@ -53,13 +53,42 @@ componentDidMount() {
         )
     }
 
-    setpageHandler = (direction) => {
-        if(direction === 'next') {
-            this.setState({
-                comingsooncurrentpage: this.state.comingsooncurrentpage + 1})
-        }  else if (direction === 'prev') {
-            this.setState({
-                comingsooncurrentpage: this.state.comingsooncurrentpage - 1});
+    setpageHandler = (direction, section) => {
+        if (section === 'coming') {
+            if(direction === 'next') {
+                this.setState({
+                    comingsooncurrentpage: this.state.comingsooncurrentpage + 1})
+            }  else if (direction === 'prev') {
+                this.setState({
+                    comingsooncurrentpage: this.state.comingsooncurrentpage - 1});
+            }
+        }
+        if (section === 'popular') {
+            if(direction === 'next') {
+                this.setState({
+                    popularcurrentpage: this.state.popularcurrentpage + 1})
+            }  else if (direction === 'prev') {
+                this.setState({
+                    popularcurrentpage: this.state.popularcurrentpage - 1});
+            }
+        }
+        if (section === 'nowplaying') {
+            if(direction === 'next') {
+                this.setState({
+                    nowplayingcurrentpage: this.state.nowplayingcurrentpage + 1})
+            }  else if (direction === 'prev') {
+                this.setState({
+                    nowplayingcurrentpage: this.state.nowplayingcurrentpage - 1});
+            }
+        }
+        if (section === 'toprated') {
+            if(direction === 'next') {
+                this.setState({
+                    topratedcurrentpage: this.state.topratedcurrentpage + 1})
+            }  else if (direction === 'prev') {
+                this.setState({
+                    topratedcurrentpage: this.state.topratedcurrentpage - 1});
+            }
         }
     }
     render() {

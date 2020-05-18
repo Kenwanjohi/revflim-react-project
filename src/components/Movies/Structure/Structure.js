@@ -14,14 +14,20 @@ const structure = (props) => {
         nowplayingisLoading,
         nowplayingerror,
         nowplayingerrorstring,
+        nowplayingcurrentpage,
+        nowplayingperpage,
         popularresults,
         popularisLoading,
         popularerror,
+        popularcurrentpage,
+        popularperpage,
         popularerrorstring,
         topratedresults,
         topratedisLoading,
         topratederror,
         topratederrorstring,
+        topratedcurrentpage,
+        topratedperpage,
 
     } = props.data
     let pop = null
@@ -62,11 +68,11 @@ const structure = (props) => {
           }
           
           if(popularresults) {
-              pop = popularresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+              pop = popularresults.slice((popularcurrentpage * popularperpage) - popularperpage, popularperpage * popularcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
           let top
           if(topratedresults) {
-              top = topratedresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+              top = topratedresults.slice((topratedcurrentpage * topratedperpage) - topratedperpage, topratedperpage * topratedcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
           let coming
           if(comingsoonresults) {
@@ -74,39 +80,39 @@ const structure = (props) => {
           }
           let now
           if(nowplayingresults) {
-              now = nowplayingresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+              now = nowplayingresults.slice((nowplayingcurrentpage * nowplayingperpage) - nowplayingperpage, nowplayingperpage * nowplayingcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
         return(
     
             <>
             <div className={Styles.card}>
             <div className={Styles.section}>{props.popsec}</div>
-               <i className={`${Styles.right} ${Styles.arrow}`}></i>
-               <i className={`${Styles.left} ${Styles.arrow}`}></i>
+               <i className={`${Styles.right} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'popular')}></i>
+               <i className={`${Styles.left} ${Styles.arrow}`} onClick={ () => props.changepage('next', 'popular')}></i>
                 <div className={Styles.grid}>
                 {pop}
             </div>
             </div>
             <div className={Styles.card}>
             <div className={Styles.section}>{props.nowsec}</div>
-               <i className={`${Styles.right} ${Styles.arrow}`}></i>
-               <i className={`${Styles.left} ${Styles.arrow}`}></i>
+               <i className={`${Styles.right} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'nowplaying')}></i>
+               <i className={`${Styles.left} ${Styles.arrow}`}  onClick={ () => props.changepage('prev', 'nowplaying')}></i>
                 <div className={Styles.grid}>
                 {now}
             </div>
             </div>
             <div className={Styles.card}>
             <div className={Styles.section}>{props.comingsec}</div>
-               <i className={`${Styles.right} ${Styles.arrow}`} onClick={ () => props.changepage('next')} ></i>
-               <i className={`${Styles.left} ${Styles.arrow}`} onClick={ () => props.changepage('prev')}></i>
+               <i className={`${Styles.right} ${Styles.arrow}`} onClick={ () => props.changepage('next', 'coming')} ></i>
+               <i className={`${Styles.left} ${Styles.arrow}`} onClick={ () => props.changepage('prev', 'coming')}></i>
                 <div className={Styles.grid}>
                 {coming}
             </div>
             </div>
             <div className={Styles.card}>
             <div className={Styles.section}>{props.topsec}</div>
-               <i className={`${Styles.right} ${Styles.arrow}`}></i>
-               <i className={`${Styles.left} ${Styles.arrow}`}></i>
+               <i className={`${Styles.right} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'toprated')}></i>
+               <i className={`${Styles.left} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'toprated')}></i>
                 <div className={Styles.grid}>
                 {top}
             </div>
