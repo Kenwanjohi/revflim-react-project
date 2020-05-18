@@ -52,8 +52,8 @@ const structure = (props) => {
           if(nowplayingresults) {
               now = nowplayingresults.slice((nowplayingcurrentpage * nowplayingperpage) - nowplayingperpage, nowplayingperpage * nowplayingcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
-        console.log(popularcurrentpage)  
-
+     
+          
         return(
     
             <>
@@ -65,8 +65,9 @@ const structure = (props) => {
                         (popularerror) ? 
                         <div>{popularerrorstring}</div> :
                         <>
-                        <i className={`${Styles.right} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'popular')}></i>
-                        <i className={`${Styles.left} ${Styles.arrow}`} onClick={ () => props.changepage('prev', 'popular')}></i>
+                         <i className={[Styles.left, Styles.arrow, popularcurrentpage === 1? Styles.display : null].join(' ')} onClick={ () => props.changepage('prev', 'popular')}></i>
+                        <i className={[Styles.right, Styles.arrow, popularcurrentpage === (popularresults.length / 4)? Styles.display : null].join(' ')}  onClick={ () => props.changepage('next', 'popular')}></i>
+                        {/* {renderButtons()} */}
                         <div className={Styles.grid}>
                          {pop}
                          </div>
@@ -87,8 +88,8 @@ const structure = (props) => {
                         (nowplayingerror) ? 
                         <div>{nowplayingerrorstring}</div>:
                         <>
-                         <i className={`${Styles.right} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'nowplaying')}></i>
-                        <i className={`${Styles.left} ${Styles.arrow}`}  onClick={ () => props.changepage('prev', 'nowplaying')}></i>
+                         <i className={[Styles.left, Styles.arrow, nowplayingcurrentpage === 1? Styles.display : null].join(' ')}  onClick={ () => props.changepage('prev', 'nowplaying')}></i>
+                        <i className={[Styles.right, Styles.arrow, nowplayingcurrentpage === (nowplayingresults.length / 4)? Styles.display : null].join(' ')}  onClick={ () => props.changepage('next', 'nowplaying')}></i>
                         <div className={Styles.grid}>
                         {now}
                         </div>
@@ -98,7 +99,7 @@ const structure = (props) => {
                 }
                 
             </div>
-           
+
             <div className={Styles.card}>
             <div className={Styles.section}>{props.comingsec}</div>
               
@@ -108,8 +109,8 @@ const structure = (props) => {
                         (comingsoonerror) ? 
                         <div>{comingsoonerrorstring}</div>:  
                         <>
-                         <i className={`${Styles.right} ${Styles.arrow}`} onClick={ () => props.changepage('next', 'coming')} ></i>
-                        <i className={`${Styles.left} ${Styles.arrow}`} onClick={ () => props.changepage('prev', 'coming')}></i>
+                         <i className={[Styles.left, Styles.arrow, comingsooncurrentpage === 1? Styles.display : null].join(' ')} onClick={ () => props.changepage('prev', 'coming')} ></i>
+                        <i className={[Styles.right, Styles.arrow, comingsooncurrentpage === (comingsoonresults.length / 4)? Styles.display : null].join(' ')} onClick={ () => props.changepage('next', 'coming')}></i>
                          <div className={Styles.grid}>
                         {coming}
                         </div>
@@ -129,8 +130,8 @@ const structure = (props) => {
                         (topratederror) ? 
                         <div>{topratederrorstring}</div>: 
                         <>
-                         <i className={`${Styles.right} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'toprated')}></i>
-                        <i className={`${Styles.left} ${Styles.arrow}`}  onClick={ () => props.changepage('next', 'toprated')}></i>
+                         <i className={[Styles.left, Styles.arrow, topratedcurrentpage === 1? Styles.display : null].join(' ')}  onClick={ () => props.changepage('prev', 'toprated')}></i>
+                        <i className={[Styles.right, Styles.arrow, topratedcurrentpage === (topratedresults.length / 4)? Styles.display : null].join(' ')}  onClick={ () => props.changepage('next', 'toprated')}></i>
                         <div className={Styles.grid}>
                         {top}
                         </div>
