@@ -8,6 +8,8 @@ const structure = (props) => {
         comingsoonisLoading,
         comingsoonerror,
         comingsoonerrorstring,
+        comingsooncurrentpage,
+        comingsoonperpage,
         nowplayingresults,
         nowplayingisLoading,
         nowplayingerror,
@@ -19,15 +21,16 @@ const structure = (props) => {
         topratedresults,
         topratedisLoading,
         topratederror,
-        topratederrorstring
+        topratederrorstring,
 
     } = props.data
+    let pop = null
            //popular section
-           if(popularerror) {
-            return <div>{popularerrorstring}</div>
+        if(popularerror) {
+            pop = <div>{popularerrorstring}</div>
          } 
          if(popularisLoading) {
-             return <Spinner>loading...</Spinner>
+             pop = <Spinner>loading...</Spinner>
          }
  
          //toprated section
@@ -57,7 +60,7 @@ const structure = (props) => {
             }
             return str.slice(0, num) + '...'
           }
-          let pop = null
+          
           if(popularresults) {
               pop = popularresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
@@ -67,7 +70,7 @@ const structure = (props) => {
           }
           let coming
           if(comingsoonresults) {
-              coming = comingsoonresults.slice(0, 4).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+              coming = comingsoonresults.slice((comingsooncurrentpage * comingsoonperpage) - comingsoonperpage, comingsoonperpage * comingsooncurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
           }
           let now
           if(nowplayingresults) {
@@ -94,8 +97,8 @@ const structure = (props) => {
             </div>
             <div className={Styles.card}>
             <div className={Styles.section}>{props.comingsec}</div>
-               <i className={`${Styles.right} ${Styles.arrow}`}></i>
-               <i className={`${Styles.left} ${Styles.arrow}`}></i>
+               <i className={`${Styles.right} ${Styles.arrow}`} onClick={ () => props.changepage('next')} ></i>
+               <i className={`${Styles.left} ${Styles.arrow}`} onClick={ () => props.changepage('prev')}></i>
                 <div className={Styles.grid}>
                 {coming}
             </div>

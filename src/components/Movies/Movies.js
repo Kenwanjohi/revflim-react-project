@@ -29,7 +29,9 @@ componentDidMount() {
         this.setState({
            [`${key}isLoading`]: true,
            [`${key}results`] : [],
-           [`${key}error`] : null
+           [`${key}error`] : null,
+           [`${key}currentpage`]: 1,
+           [`${key}perpage`]: 4
         }, async () => {
             try{
                 let result = await axios.get(`https://cors-anywhere.herokuapp.com/${BASE_URL}${endPoint}?api_key=${apikey}&language=en-US`)
@@ -50,6 +52,16 @@ componentDidMount() {
         }
         )
     }
+
+    setpageHandler = (direction) => {
+        if(direction === 'next') {
+            this.setState({
+                comingsooncurrentpage: this.state.comingsooncurrentpage + 1})
+        }  else if (direction === 'prev') {
+            this.setState({
+                comingsooncurrentpage: this.state.comingsooncurrentpage - 1});
+        }
+    }
     render() {
         console.log(this.state)
         return(
@@ -58,6 +70,7 @@ componentDidMount() {
            
                 <div className={Styles.card}>
                     <Structure 
+                        changepage ={this.setpageHandler}
                         popsec="popular"
                         topsec="toprated"
                         nowsec="nowplaying"
