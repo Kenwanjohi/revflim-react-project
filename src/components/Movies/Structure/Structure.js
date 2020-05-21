@@ -10,7 +10,7 @@ const structure = (props) => {
             <Spinner>loading...</Spinner>:
             (
                 (props.isError) ? 
-                <div>{props.errorstring}</div> :
+                <div>{props.errorString}</div> :
                 <>
                 <i className={[Styles.left, Styles.arrow, props.currentPage === 1? Styles.display : null].join(' ')} onClick={ () => props.changePageHandler('prev', props.sec)}></i>
                 <i className={[Styles.right, Styles.arrow, props.currentPage === (props.results.length / 4)? Styles.display : null].join(' ')}  onClick={ () => props.changePageHandler('next', props.sec)}></i>

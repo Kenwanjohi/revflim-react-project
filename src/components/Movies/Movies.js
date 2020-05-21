@@ -3,7 +3,7 @@ import Type from './Type/Type';
 import Structure from './Structure/Structure'
 import Styles from './Movies.module.css'
 import Single from './Single/Single';
-import axios from 'axios'
+import axios from 'axios';
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
 const apikey = `6d52450de693cb39e47fd26bd1c349da`;
 const endPoints = {
@@ -18,7 +18,8 @@ class Movie extends Component {
         popularresults: [],
         nowplayingresults: [],
         comingsoonresults: [],
-        topratedresults: []
+        topratedresults: [],
+        selectedmovieid: null
     }
 componentDidMount() {
     Object.keys(endPoints).forEach(key => {
@@ -53,7 +54,9 @@ componentDidMount() {
         }
         )
     }
-
+    movieSelected = (id) => {
+        this.setState({selectedmovieid: id})
+    }
     setpageHandler = (direction, section) => {
         if (section === 'coming') {
             if(direction === 'next') {
@@ -129,19 +132,44 @@ componentDidMount() {
           }
         let pop = null
         if(popularresults) {
-            pop = popularresults.slice((popularcurrentpage * popularperpage) - popularperpage, popularperpage * popularcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+            pop = popularresults.slice((popularcurrentpage * popularperpage) - popularperpage, popularperpage * popularcurrentpage).map(curr => <Single 
+            key={curr.id}
+            main = "movies"
+            title= {curr.title} 
+            details={curr.id} 
+            link={curr.poster_path} 
+            clicked = {() => this.movieSelected(curr.id)}
+            description={truncateString(curr.overview)} />)
         }
         let top = null
         if(topratedresults) {
-            top = topratedresults.slice((topratedcurrentpage * topratedperpage) - topratedperpage, topratedperpage * topratedcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+            top = topratedresults.slice((topratedcurrentpage * topratedperpage) - topratedperpage, topratedperpage * topratedcurrentpage).map(curr => <Single 
+            key={curr.id}
+            main = "movies"
+            title= {curr.title} 
+            details={curr.id} 
+            link={curr.poster_path} 
+            description={truncateString(curr.overview)} />)
         }
         let coming = null
         if(comingsoonresults) {
-            coming = comingsoonresults.slice((comingsooncurrentpage * comingsoonperpage) - comingsoonperpage, comingsoonperpage * comingsooncurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+            coming = comingsoonresults.slice((comingsooncurrentpage * comingsoonperpage) - comingsoonperpage, comingsoonperpage * comingsooncurrentpage).map(curr => <Single 
+            key={curr.id} 
+            title= {curr.title}
+            main = "movies"
+            details={curr.id} 
+            link={curr.poster_path}
+            description={truncateString(curr.overview)} />)
         }
         let now = null
         if(nowplayingresults) {
-            now = nowplayingresults.slice((nowplayingcurrentpage * nowplayingperpage) - nowplayingperpage, nowplayingperpage * nowplayingcurrentpage).map(curr => <Single key={curr.id} title= {curr.title} details={curr.id} link={curr.poster_path} description={truncateString(curr.overview)} />)
+            now = nowplayingresults.slice((nowplayingcurrentpage * nowplayingperpage) - nowplayingperpage, nowplayingperpage * nowplayingcurrentpage).map(curr => <Single 
+                key={curr.id} 
+                main = "movies"
+                title= {curr.title} 
+                details={curr.id} 
+                link={curr.poster_path} 
+                description={truncateString(curr.overview)} />)
         }
    
         return(
@@ -194,7 +222,6 @@ componentDidMount() {
                         sec = "toprated"
                     />  
                  </div> 
-          
             </>
         )
     }

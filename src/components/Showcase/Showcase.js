@@ -7,7 +7,7 @@ const showcase = () => {
 
 }
     return(
-        <section className={Styles.section} style={background}>
+        <section id="home" className={Styles.section} style={background}>
             <div className={Styles.flex}>
                 <p>Discover your favorite movies and tv shows</p>
             </div>
