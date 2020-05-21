@@ -13,7 +13,7 @@ const endPoints = {
     "toprated": "top_rated"
 }
 class Movie extends Component {
-
+    _isMounted = false
     state={
         popularresults: [],
         nowplayingresults: [],
@@ -22,6 +22,7 @@ class Movie extends Component {
         selectedmovieid: null
     }
 componentDidMount() {
+    this._isMounted = true;
     Object.keys(endPoints).forEach(key => {
         this.getMoviesData(endPoints[key], key)
     })
@@ -38,10 +39,12 @@ componentDidMount() {
             try{
                 let result = await axios.get(`https://cors-anywhere.herokuapp.com/${BASE_URL}${endPoint}?api_key=${apikey}&language=en-US`)
                 const results = await result.data.results
-                this.setState({
-                    [`${key}isLoading`]: false,
-                    [`${key}results`] : results,
-                    [`${key}error`] : false})
+                if(this._isMounted) {
+                    this.setState({
+                        [`${key}isLoading`]: false,
+                        [`${key}results`] : results,
+                        [`${key}error`] : false})
+                }
 
             } catch(error) {
                 this.setState({
@@ -54,9 +57,10 @@ componentDidMount() {
         }
         )
     }
-    movieSelected = (id) => {
-        this.setState({selectedmovieid: id})
-    }
+
+   componentWillUnmount() {
+       this._isMounted = false
+   }
     setpageHandler = (direction, section) => {
         if (section === 'coming') {
             if(direction === 'next') {
@@ -134,18 +138,15 @@ componentDidMount() {
         if(popularresults) {
             pop = popularresults.slice((popularcurrentpage * popularperpage) - popularperpage, popularperpage * popularcurrentpage).map(curr => <Single 
             key={curr.id}
-            main = "movies"
             title= {curr.title} 
             details={curr.id} 
-            link={curr.poster_path} 
-            clicked = {() => this.movieSelected(curr.id)}
+            link={curr.poster_path}
             description={truncateString(curr.overview)} />)
         }
         let top = null
         if(topratedresults) {
             top = topratedresults.slice((topratedcurrentpage * topratedperpage) - topratedperpage, topratedperpage * topratedcurrentpage).map(curr => <Single 
             key={curr.id}
-            main = "movies"
             title= {curr.title} 
             details={curr.id} 
             link={curr.poster_path} 
@@ -156,7 +157,6 @@ componentDidMount() {
             coming = comingsoonresults.slice((comingsooncurrentpage * comingsoonperpage) - comingsoonperpage, comingsoonperpage * comingsooncurrentpage).map(curr => <Single 
             key={curr.id} 
             title= {curr.title}
-            main = "movies"
             details={curr.id} 
             link={curr.poster_path}
             description={truncateString(curr.overview)} />)
@@ -165,7 +165,6 @@ componentDidMount() {
         if(nowplayingresults) {
             now = nowplayingresults.slice((nowplayingcurrentpage * nowplayingperpage) - nowplayingperpage, nowplayingperpage * nowplayingcurrentpage).map(curr => <Single 
                 key={curr.id} 
-                main = "movies"
                 title= {curr.title} 
                 details={curr.id} 
                 link={curr.poster_path} 
