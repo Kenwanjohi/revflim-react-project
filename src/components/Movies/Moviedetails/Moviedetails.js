@@ -24,7 +24,10 @@ const MovieDetails = (props) => {
                 }
             }        
             getDetails()
-    }, [props.match.params.id])
+    }, [props.match.params.id]);
+    function formatDate(date) {
+      return  date.split('-').filter(el => el.length >= 4)
+    };
     let details = null;
     const{title, overview, poster_path, release_date, runtime, tagline, vote_average, id, genres} = data;
     console.log(id)
@@ -39,11 +42,11 @@ const MovieDetails = (props) => {
                 </div>
                 </div>
                 <div className={Styles.text}>
-                    <div>{tagline}</div>
-                    <div>{title}</div>
-                    {/* <div>`${genres}, ${release_date}`</div> */}
-                    <div>{runtime}</div>
-                    <div>{overview}</div>
+                    <div className={Styles.tagline}>{tagline}</div>
+                    <div className={Styles.title}>{title}</div>
+                    <div className={Styles.datum}>{genres && `${genres.map(el => el.name).join(`${String.fromCharCode(0x2022)}`)}${String.fromCharCode(0x2022)}${formatDate(release_date)}`}</div>
+                    <div className={Styles.runtime}>{runtime}</div>
+                    <div className={Styles.description}>{overview}</div>
                     <div>{vote_average}</div>
                 </div>
             </div>
