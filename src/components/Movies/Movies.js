@@ -38,13 +38,14 @@ componentDidMount() {
         }, async () => {
             try{
                 let result = await axios.get(`https://cors-anywhere.herokuapp.com/${BASE_URL}${endPoint}?api_key=${apikey}&language=en-US`)
-                const results = await result.data.results
+                const results = result.data.results
                 if(this._isMounted) {
                     this.setState({
                         [`${key}isLoading`]: false,
                         [`${key}results`] : results,
                         [`${key}error`] : false})
-                }
+                console.log(this.state)
+                    }
 
             } catch(error) {
                 this.setState({
@@ -100,7 +101,6 @@ componentDidMount() {
         }
     }
     render() {
-        console.log(this.state)
         const {
             comingsoonresults,
             comingsoonisLoading,

@@ -1,0 +1,35 @@
+.card {
+    height: 100vh;
+    width: 100vw;
+}
+.container {
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+}
+.flex {
+    padding: 0 2rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+.imgcard {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.imgcontainer {
+    width: 280px;
+}
+.image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    width: 100%;
+}
+.text {
+    margin-left: 2rem;
+    color: white;
+}

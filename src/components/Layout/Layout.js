@@ -22,6 +22,7 @@ class Layout extends Component {
                 <Showcase/>
                 <main>
                     {this.props.children}
+                
                 </main>
             </>
         )
