@@ -33,13 +33,26 @@ const MovieDetails = (props) => {
     function getColors (colors) {
         setColor(colors)
     }
-    let col = null
-    if(color) {
-    col = color[0]
-      console.log((color[0]))
 
-    }
-    
+function formatTime(num) {
+  let time;
+  if(num > 0 && num < 60) {
+    time = `${num}mins`
+  } else if (num === 60) {
+    time = `${(60/60)} hr`
+  }
+  else if (num > 60) {
+	let hour = Math.floor(num/60)
+  let min = Math.round((num/60 - hour) * 60)
+    time = `${hour}hrs ${min}mins`
+  }
+else {
+	return null
+}
+return time
+}
+
+
     let details = null;
     const{title, overview, poster_path, release_date, runtime, tagline, vote_average, id, genres} = data;
     if(color) {
@@ -59,7 +72,7 @@ const MovieDetails = (props) => {
                     <div className={Styles.tagline}>{tagline}</div>
                     <div className={Styles.title}>{title}</div>
                     <div className={Styles.datum}>{genres && `${genres.map(el => el.name).join(`${String.fromCharCode(0x2022)}`)}${String.fromCharCode(0x2022)}${formatDate(release_date)}`}</div>
-                    <div className={Styles.runtime}>{runtime}</div>
+                    <div className={Styles.runtime}>{formatTime(runtime)}</div>
                     <div className={Styles.description}>{overview}</div>
                     <div>{vote_average}</div>
                 </div>
