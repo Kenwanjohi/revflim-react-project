@@ -3,11 +3,13 @@ import Toolbar from '../../Navigation/Toolbar/Toolbar'
 import  Styles  from './Moviedetails.module.css'
 import axios from 'axios'
 import Spinner from '../../Spinner/Spinner'
+import { ColorExtractor } from "react-color-extractor";
 const MovieDetails = (props) => {
     const [data, setData] = useState([])
     const [isloading, setloading] = useState(false)
     const [error, seterror] = useState(false)
     const [errormessage, seterrormessage] = useState(null)
+    const [color, setColor] = useState([]);
     useEffect( () => {
             setloading(true)
             async function getDetails() {
@@ -28,17 +30,29 @@ const MovieDetails = (props) => {
     function formatDate(date) {
       return  date.split('-').filter(el => el.length >= 4)
     };
+    function getColors (colors) {
+        setColor(colors)
+    }
+    let col = null
+    if(color) {
+    col = color[0]
+      console.log((color[0]))
+
+    }
+    
     let details = null;
     const{title, overview, poster_path, release_date, runtime, tagline, vote_average, id, genres} = data;
-    console.log(id)
+    if(color) {
     if(data) {
         console.log(data)
-       details =  <div className={Styles.card} key ={id}>
+       details =  <div className={Styles.card} style={{backgroundImage: `linear-gradient(to right, ${color[0]}, 50%, transparent)`}} key ={id}>
         <div className={Styles.container}>
             <div className={Styles.flex}>
                 <div className={Styles.imgcard}>
                 <div className={Styles.imgcontainer}>
+                <ColorExtractor getColors={getColors}>
                     <img className={Styles.image} src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title}/>
+                </ColorExtractor>
                 </div>
                 </div>
                 <div className={Styles.text}>
@@ -52,7 +66,7 @@ const MovieDetails = (props) => {
             </div>
         </div>
     </div>
-    }
+    }}
     return(
         <>
         <Toolbar/>
