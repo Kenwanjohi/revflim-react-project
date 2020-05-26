@@ -4,6 +4,7 @@ import  Styles  from './Moviedetails.module.css'
 import axios from 'axios'
 import Spinner from '../../Spinner/Spinner'
 import { ColorExtractor } from "react-color-extractor";
+const key = `6d52450de693cb39e47fd26bd1c349da`;
 const MovieDetails = (props) => {
     const [data, setData] = useState([])
     const [isloading, setloading] = useState(false)
@@ -14,7 +15,6 @@ const MovieDetails = (props) => {
             setloading(true)
             async function getDetails() {
                 try {
-                    const key = `6d52450de693cb39e47fd26bd1c349da`;
                     const result = await axios(`https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3/movie/${props.match.params.id}?api_key=${key}&language=en-US`);
                     const results = result.data;
                     setData(results)
@@ -27,7 +27,8 @@ const MovieDetails = (props) => {
             }        
             getDetails()
     }, [props.match.params.id]);
-    function formatDate(date) {
+
+function formatDate(date) {
       return  date.split('-').filter(el => el.length >= 4)
     };
     function getColors (colors) {
@@ -53,12 +54,11 @@ return time
 }
 
 
-    let details = null;
-    const{title, overview, poster_path, release_date, runtime, tagline, vote_average, id, genres} = data;
-    if(color) {
-    if(data) {
-        console.log(data)
-       details =  <div className={Styles.card} style={{backgroundImage: `linear-gradient(to right, ${color[0]}, 50%, transparent)`}} key ={id}>
+    let details = null
+    const{title, overview, poster_path, release_date, runtime, tagline, vote_average, genres} = data;
+    if(color && data) {
+        
+        details =  <div className={Styles.card} style={{backgroundImage: `linear-gradient(to right, ${color[0]}, 50%, transparent)`}}>
         <div className={Styles.container}>
             <div className={Styles.flex}>
                 <div className={Styles.imgcard}>
@@ -71,24 +71,24 @@ return time
                 <div className={Styles.text}>
                     <div className={Styles.tagline}>{tagline}</div>
                     <div className={Styles.title}>{title}</div>
-                    <div className={Styles.datum}>{genres && `${genres.map(el => el.name).join(`${String.fromCharCode(0x2022)}`)}${String.fromCharCode(0x2022)}${formatDate(release_date)}`}</div>
+                    <div className={Styles.datum}>{genres && `${genres.map((el) => el.name).join(`${String.fromCharCode(0x2022)}`)}${String.fromCharCode(0x2022)}${formatDate(release_date)}`}</div>
                     <div className={Styles.runtime}>{formatTime(runtime)}</div>
                     <div className={Styles.description}>{overview}</div>
-                    <div>{vote_average}</div>
+                    <div>{vote_average} Tmdb</div>
                 </div>
             </div>
         </div>
     </div>
-    }}
+    }
     return(
         <>
         <Toolbar/>
         {isloading ? <Spinner>loading...</Spinner>:
 
         (error? <div>{errormessage}</div> :
-        [details])}
+        <>{details}</>)}
         </>    
         )
-    }
+}
 
 export default MovieDetails;

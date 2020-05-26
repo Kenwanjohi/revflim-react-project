@@ -44,7 +44,6 @@ componentDidMount() {
                         [`${key}isLoading`]: false,
                         [`${key}results`] : results,
                         [`${key}error`] : false})
-                console.log(this.state)
                     }
 
             } catch(error) {
